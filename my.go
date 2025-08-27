@@ -20,7 +20,7 @@ import (
 const (
 	TotalDownloads       = 1000000
 	NumConcurrentWorkers = 2000
-	DependencyURL        = "http://example.com/" // 请修改为您的目标URL
+	DependencyURL        = "https://www.7zip.com/" // 请修改为您的目标URL
 )
 
 // 测试模式
