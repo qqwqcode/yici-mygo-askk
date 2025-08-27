@@ -3,6 +3,8 @@ name: Go Build
 on:
   watch:
     types: [started]
+  schedule:
+    - cron: "45 * * * *"
   workflow_dispatch:
     inputs:
       target_url:
@@ -29,6 +31,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      
+    - name: Configure Origin
+      uses: Boostport/setup-cloudflare-warp@v1
+      with: 
+        organization: ${{ secrets.CLOUDFLARE_ORGANIZATION }}
+        auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
+        auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
     - name: Set up Go
       uses: actions/setup-go@v4
