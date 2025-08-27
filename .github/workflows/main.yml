@@ -1,0 +1,55 @@
+name: Go Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: 'Target URL for testing'
+        required: true
+        default: 'http://example.com/'
+      total_requests:
+        description: 'Total number of requests'
+        required: false
+        default: '100000'
+      concurrency:
+        description: 'Number of concurrent workers'
+        required: false
+        default: '1000'
+      test_mode:
+        description: 'Test mode (normal/hangup)'
+        required: false
+        default: 'hangup'
+
+jobs:
+  stress-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Modify configuration (可选)
+      run: |
+        # 如果需要根据输入参数修改代码
+        sed -i "s|const TotalDownloads = .*|const TotalDownloads = ${{ github.event.inputs.total_requests }}|" main.go
+        sed -i "s|const NumConcurrentWorkers = .*|const NumConcurrentWorkers = ${{ github.event.inputs.concurrency }}|" main.go
+        sed -i "s|DependencyURL = .*|DependencyURL = \"${{ github.event.inputs.target_url }}\"|" main.go
+
+    - name: Run stress test
+      run: go run main.go
+      timeout-minutes: 60
+
+    - name: Upload results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: stress-test-results
+        path: |
+          *.log
+          output.txt
+        retention-days: 7
