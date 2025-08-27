@@ -1,6 +1,8 @@
 name: Go Build
 
 on:
+  watch:
+    types: [started]
   workflow_dispatch:
     inputs:
       target_url:
