@@ -9,7 +9,6 @@ import (
 	"io"
 	"math/rand"
 	"net/http"
-	"strconv"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -20,7 +19,7 @@ import (
 const (
 	TotalDownloads       = 1000000
 	NumConcurrentWorkers = 2000
-	DependencyURL        = "https://www.7zip.com/" // 请修改为您的目标URL
+	DependencyURL        = "http://example.com/" // 请修改为您的目标URL
 )
 
 // 测试模式
