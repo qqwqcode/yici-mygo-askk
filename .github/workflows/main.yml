@@ -42,8 +42,7 @@ jobs:
 
     - name: Run stress test
       run: |
-        cd run
-        go run main.go
+        go run my.go
       timeout-minutes: 60
 
     - name: Upload results
