@@ -21,7 +21,7 @@ on:
         default: 'hangup'
 
 jobs:
-  stress-test:
+  test:
     runs-on: ubuntu-latest
     
     steps:
@@ -47,7 +47,7 @@ jobs:
 
     - name: Upload results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: stress-test-results
         path: |
