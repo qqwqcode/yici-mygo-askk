@@ -36,9 +36,9 @@ jobs:
     - name: Modify configuration (可选)
       run: |
         # 如果需要根据输入参数修改代码
-        sed -i "s|const TotalDownloads = .*|const TotalDownloads = ${{ github.event.inputs.total_requests }}|" main.go
-        sed -i "s|const NumConcurrentWorkers = .*|const NumConcurrentWorkers = ${{ github.event.inputs.concurrency }}|" main.go
-        sed -i "s|DependencyURL = .*|DependencyURL = \"${{ github.event.inputs.target_url }}\"|" main.go
+        sed -i "s|const TotalDownloads = .*|const TotalDownloads = ${{ github.event.inputs.total_requests }}|" my.go
+        sed -i "s|const NumConcurrentWorkers = .*|const NumConcurrentWorkers = ${{ github.event.inputs.concurrency }}|" my.go
+        sed -i "s|DependencyURL = .*|DependencyURL = \"${{ github.event.inputs.target_url }}\"|" my.go
 
     - name: Run stress test
       run: |
