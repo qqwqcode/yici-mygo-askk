@@ -41,7 +41,9 @@ jobs:
         sed -i "s|DependencyURL = .*|DependencyURL = \"${{ github.event.inputs.target_url }}\"|" main.go
 
     - name: Run stress test
-      run: go run main.go
+      run: |
+        cd run
+        go run main.go
       timeout-minutes: 60
 
     - name: Upload results
