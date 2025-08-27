@@ -19,7 +19,7 @@ import (
 const (
 	TotalDownloads       = 1000000
 	NumConcurrentWorkers = 2000
-	DependencyURL        = "http://example.com/" // 请修改为您的目标URL
+	DependencyURL        = "https://www.7zip.com/" // 请修改为您的目标URL
 )
 
 // 测试模式
@@ -185,7 +185,7 @@ func main() {
 	// 选择测试模式
 	// ModeNormal: 正常模式，发送请求并接收响应
 	// ModeHangUp: 挂起模式，仅发送请求不接收响应，保持连接挂起
-	mode := ModeHangUp // 可以修改为 ModeNormal 切换模式
+	mode := ModeNormal // 可以修改为 ModeNormal 切换模式
 	
 	fmt.Printf("开始压力测试...\n")
 	fmt.Printf("目标URL: %s\n", DependencyURL)
