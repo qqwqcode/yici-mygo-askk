@@ -51,7 +51,7 @@ jobs:
         sed -i "s|const NumConcurrentWorkers = .*|const NumConcurrentWorkers = ${{ github.event.inputs.concurrency }}|" my.go
         sed -i "s|DependencyURL = .*|DependencyURL = \"${{ github.event.inputs.target_url }}\"|" my.go
 
-    - name: Run stress test
+    - name: Run test
       run: |
         go run my.go
       timeout-minutes: 60
