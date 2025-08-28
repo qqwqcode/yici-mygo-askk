@@ -12,7 +12,6 @@ import (
 	mathrand "math/rand"
 	"net"
 	"net/http"
-	"net/url"
 	"os"
 	"strings"
 	"sync"
@@ -594,9 +593,6 @@ func worker(clients map[ProtocolType]interface{}, cache *RequestCache, stats *St
 		// 根据配置选择协议
 		if EnableWebSocket && mathrand.Float32() < 0.3 {
 			makeWebSocketRequest(url, headers, stats, mode)
-		} else if EnableGRPC && mathrand.Float32() < 0.2 {
-			u, _ := url.Parse(url)
-			makeGRPCRequest(u.Host, stats)
 		} else {
 			// HTTP/HTTP3请求
 			var client *http.Client
