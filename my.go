@@ -1195,21 +1195,6 @@ func calculateWebsiteScore(stats *Stats, elapsed time.Duration) (score float64, 
 		score -= (100 - avgRate) * 0.2
 	}
 	
-	// 流量仿真模式的额外评分
-	if EnableTrafficSimulation {
-		// 跟随跳转能力加分
-		redirects := float64(atomic.LoadInt64(&stats.RedirectsFollowed))
-		if redirects > 0 {
-			score += math.Min(redirects/totalRequests*10, 5) // 最多加5分
-		}
-		
-		// 403处理能力
-		handle403 := float64(atomic.LoadInt64(&stats.Handle403Count))
-		if handle403 > 0 {
-			// 403太多说明反爬措施强，适当扣分
-			score -= math.Min(handle403/totalRequests*10, 10)
-		}
-	}
 	
 	// 确保分数在0-100范围内
 	if score < 0 {
