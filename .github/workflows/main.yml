@@ -46,12 +46,3 @@ jobs:
         go run my.go
       timeout-minutes: 60
 
-    - name: Upload results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: stress-test-results
-        path: |
-          *.log
-          output.txt
-        retention-days: 7
