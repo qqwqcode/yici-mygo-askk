@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"context"
-	"crypto/rand"
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
@@ -15,7 +14,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strconv"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -597,7 +595,7 @@ func worker(clients map[ProtocolType]interface{}, cache *RequestCache, stats *St
 		if EnableWebSocket && mathrand.Float32() < 0.3 {
 			makeWebSocketRequest(url, headers, stats, mode)
 		} else if EnableGRPC && mathrand.Float32() < 0.2 {
-			u, _ := url2.Parse(url)
+			u, _ := url.Parse(url)
 			makeGRPCRequest(u.Host, stats)
 		} else {
 			// HTTP/HTTP3请求
@@ -785,6 +783,7 @@ func main() {
 	if EnableH3QUIC {
 		// HTTP/3客户端将在worker中动态选择
 	}
+	
 	
 	// 启动工作协程
 	var wg sync.WaitGroup
