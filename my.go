@@ -460,7 +460,7 @@ func generateRandomHeaders() map[string]string {
 		
 		// 随机添加一些额外的头
 		extraHeaders := [][]string{
-			{"Referer", "https://google.com/"}
+			{"Referer", "https://google.com/"},
 		}
 		
 		for _, header := range extraHeaders {
