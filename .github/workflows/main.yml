@@ -53,6 +53,7 @@ jobs:
 
     - name: Run test
       run: |
+        go mod download
         go run my.go
       timeout-minutes: 60
 
