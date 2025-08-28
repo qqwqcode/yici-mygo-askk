@@ -46,10 +46,10 @@ var (
 	EnableGRPC              = false
 	EnableWebSocket         = false
 	EnableH3QUIC            = false
-	EnableRandomPath        = true
-	EnableRandomQueryParams = true  // 新增：随机查询参数开关
+	EnableRandomPath        = false
+	EnableRandomQueryParams = false  // 新增：随机查询参数开关
 	EnableRateLimit         = false
-	EnableTrafficSimulation = false // 新增：流量仿真模式开关
+	EnableTrafficSimulation = true // 新增：流量仿真模式开关
 	EnableFixedHeaders      = false // 新增：固定header模式开关
 	MinTLSVersion           = tls.VersionTLS10
 	MaxTLSVersion           = tls.VersionTLS13
@@ -1238,7 +1238,7 @@ func main() {
 	}
 	
 	// 选择测试模式
-	mode := ModeHangUp // 可以修改为其他模式
+	mode := ModeNormal // 可以修改为其他模式
 	
 	fmt.Printf("=== 增强型负载测试工具 ===\n")
 	fmt.Printf("目标URL数量: %d\n", len(TargetURLs))
