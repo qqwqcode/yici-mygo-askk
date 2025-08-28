@@ -30,10 +30,9 @@ import (
 
 // 配置常量
 const (
-	TotalDownloads       = 1000000
-	NumConcurrentWorkers = 2000
-	CacheSize           = 1000
-	MaxCacheWorkers     = 10
+	TotalDownloads       = 100000
+	NumConcurrentWorkers = 1000
+	CacheSize           = 2000
 	RateLimitDuration   = 15 * time.Second
 	RateLimitSpeed      = 1024 // 1KB/s
 )
@@ -46,18 +45,16 @@ var (
 	EnableGRPC              = false
 	EnableWebSocket         = false
 	EnableH3QUIC            = false
-	EnableRandomPath        = false
+	EnableRandomPath        = true
 	EnableRandomQueryParams = false  // 新增：随机查询参数开关
 	EnableRateLimit         = false
-	EnableTrafficSimulation = true // 新增：流量仿真模式开关
+	EnableTrafficSimulation = false // 新增：流量仿真模式开关
 	EnableFixedHeaders      = false // 新增：固定header模式开关
-	MinTLSVersion           = tls.VersionTLS10
+	MinTLSVersion           = tls.VersionTLS12
 	MaxTLSVersion           = tls.VersionTLS13
 	UseRandomMethod         = false
 	GlobalCacheHeaders      = map[string]string{
-		"Cache-Control": "no-cache, no-store, must-revalidate",
-		"Pragma":        "no-cache",
-		"Expires":       "0",
+		"Cache-Control": "max-age=0",
 	}
 	
 	// 全局固定Cookie存储
@@ -116,16 +113,15 @@ type RequestCache struct {
 }
 
 // Chrome浏览器标识
-var chromeUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+var chromeUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 
 // Chrome标准请求头
 var chromeHeaders = map[string]string{
 	"Accept":                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
 	"Accept-Language":           "zh-CN,zh;q=0.9,en;q=0.8",
-	"Accept-Encoding":           "gzip, deflate, br",
-	"Cache-Control":            "no-cache",
-	"Pragma":                   "no-cache",
-	"Sec-Ch-Ua":                `"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"`,
+	"Accept-Encoding":           "gzip, deflate, br, zstd",
+	"Cache-Control":            "max-age=0",
+	"Sec-Ch-Ua":                `"Not_A Brand";v="8", "Chromium";v="140", "Google Chrome";v="140"`,
 	"Sec-Ch-Ua-Mobile":         "?0",
 	"Sec-Ch-Ua-Platform":       `"Windows"`,
 	"Sec-Fetch-Dest":           "document",
@@ -215,7 +211,7 @@ func generateRandomIP() string {
 		mathrand.Intn(256), mathrand.Intn(256), mathrand.Intn(256), mathrand.Intn(256))
 }
 
-// 生成随机负载数据
+// 生成随机流量数据
 func generateRandomPayload() []byte {
 	const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	length := mathrand.Intn(901) + 100 // 100-1000
@@ -458,19 +454,13 @@ func generateRandomHeaders() map[string]string {
 		headers["Remote-Addr"] = generateRandomIP()
 		headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 		headers["Accept-Language"] = "en-US,en;q=0.5"
-		headers["Accept-Encoding"] = "gzip, deflate"
+		headers["Accept-Encoding"] = "gzip, deflate, br, zstd"
 		headers["Connection"] = "keep-alive"
 		headers["Upgrade-Insecure-Requests"] = "1"
 		
 		// 随机添加一些额外的头
 		extraHeaders := [][]string{
-			{"X-Requested-With", "XMLHttpRequest"},
-			{"Origin", "https://example.com"},
-			{"Referer", "https://google.com/"},
-			{"DNT", "1"},
-			{"Sec-Fetch-Dest", "document"},
-			{"Sec-Fetch-Mode", "navigate"},
-			{"Sec-Fetch-Site", "cross-site"},
+			{"Referer", "https://google.com/"}
 		}
 		
 		for _, header := range extraHeaders {
@@ -1104,7 +1094,7 @@ func worker(clients map[ProtocolType]interface{}, cache *RequestCache, stats *St
 			makeHTTPRequest(client, method, url, payload, headers, stats, mode)
 		}
 		
-		// 小延迟避免过度压力
+		// 小延迟避免过度
 		time.Sleep(time.Millisecond * time.Duration(mathrand.Intn(10)))
 	}
 }
@@ -1240,7 +1230,7 @@ func main() {
 	// 选择测试模式
 	mode := ModeNormal // 可以修改为其他模式
 	
-	fmt.Printf("=== 增强型负载测试工具 ===\n")
+	fmt.Printf("=== 增强测试 ===\n")
 	fmt.Printf("目标URL数量: %d\n", len(TargetURLs))
 	fmt.Printf("示例URL:\n")
 	for i, url := range TargetURLs {
@@ -1556,11 +1546,11 @@ func main() {
 	}
 	
 	if score >= 80 {
-		fmt.Printf("总结: 该网站在高负载下表现优秀，具有良好的稳定性和性能。\n")
+		fmt.Printf("总结: 该网站在高流量下表现优秀，具有良好的稳定性和性能。\n")
 	} else if score >= 60 {
-		fmt.Printf("总结: 该网站在高负载下表现一般，可能需要优化服务器配置或网络架构。\n")
+		fmt.Printf("总结: 该网站在高流量下表现一般，可能需要优化服务器配置或网络架构。\n")
 	} else {
-		fmt.Printf("总结: 该网站在高负载下表现较差，建议进行全面的性能优化。\n")
+		fmt.Printf("总结: 该网站在高流量下表现较差，建议进行全面的性能优化。\n")
 	}
 	
 	// 性能建议
