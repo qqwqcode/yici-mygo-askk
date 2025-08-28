@@ -30,8 +30,8 @@ import (
 
 // 配置常量
 const (
-	TotalDownloads       = 100000
-	NumConcurrentWorkers = 1000
+	TotalDownloads       = 10000
+	NumConcurrentWorkers = 2000
 	CacheSize           = 2000
 	RateLimitDuration   = 15 * time.Second
 	RateLimitSpeed      = 1024 // 1KB/s
