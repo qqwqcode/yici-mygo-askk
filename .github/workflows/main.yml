@@ -7,10 +7,6 @@ on:
     - cron: "45 * * * *"
   workflow_dispatch:
     inputs:
-      target_url:
-        description: 'Target URL for testing'
-        required: true
-        default: 'http://example.com/'
       total_requests:
         description: 'Total number of requests'
         required: false
@@ -43,13 +39,6 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '1.21'
-
-    - name: Modify configuration (可选)
-      run: |
-        # 如果需要根据输入参数修改代码
-        sed -i "s|const TotalDownloads = .*|const TotalDownloads = ${{ github.event.inputs.total_requests }}|" my.go
-        sed -i "s|const NumConcurrentWorkers = .*|const NumConcurrentWorkers = ${{ github.event.inputs.concurrency }}|" my.go
-        sed -i "s|DependencyURL = .*|DependencyURL = \"${{ github.event.inputs.target_url }}\"|" my.go
 
     - name: Run test
       run: |
