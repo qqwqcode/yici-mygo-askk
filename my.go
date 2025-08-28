@@ -45,7 +45,7 @@ var (
 	OnlyShowNon200Errors    = true
 	EnableGRPC              = false
 	EnableWebSocket         = false
-	EnableH3QUIC            = false
+	EnableH3QUIC            = true
 	EnableRandomPath        = true
 	EnableRandomQueryParams = true  // 新增：随机查询参数开关
 	EnableRateLimit         = false
