@@ -30,9 +30,9 @@ import (
 
 // 配置常量
 const (
-	TotalDownloads       = 1000000
-	NumConcurrentWorkers = 2000
-	CacheSize           = 5000
+	TotalDownloads       = 10000
+	NumConcurrentWorkers = 1000
+	CacheSize           = 2000
 	MaxCacheWorkers     = 100
 	RateLimitDuration   = 15 * time.Second
 	RateLimitSpeed      = 1024 // 1KB/s
@@ -48,7 +48,7 @@ var (
 	EnableH3QUIC            = false
 	EnableRandomPath        = true
 	EnableRandomQueryParams = true  // 新增：随机查询参数开关
-	EnableRateLimit         = true
+	EnableRateLimit         = false
 	EnableTrafficSimulation = false // 新增：流量仿真模式开关
 	EnableFixedHeaders      = false // 新增：固定header模式开关
 	MinTLSVersion           = tls.VersionTLS10
