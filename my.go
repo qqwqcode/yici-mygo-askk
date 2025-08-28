@@ -1238,7 +1238,7 @@ func main() {
 	}
 	
 	// 选择测试模式
-	mode := ModeOneByte // 可以修改为其他模式
+	mode := ModeSlowReceive // 可以修改为其他模式
 	
 	fmt.Printf("=== 增强型负载测试工具 ===\n")
 	fmt.Printf("目标URL数量: %d\n", len(TargetURLs))
