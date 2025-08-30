@@ -16,7 +16,6 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"os"
-	"regexp"
 	"runtime"
 	"sort"
 	"strings"
