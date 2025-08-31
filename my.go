@@ -66,7 +66,7 @@ var (
 	EnableChunkedTransfer     = true  // 默认启用分块传输
 
 	IgnoreSSLErrors                 = true
-	HTTPVersions                    = "http/1.1"
+	HTTPVersions                    = "h2"
 	MinTLSVersion                   = tls.VersionTLS10
 	MaxTLSVersion                   = tls.VersionTLS12
 	ForceNewTLSSessionPerConnection = false
