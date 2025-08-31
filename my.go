@@ -55,10 +55,10 @@ const (
 
 // --- 优化的功能开关 ---
 var (
-	EnableFixedHeaders        = false
+	EnableFixedHeaders        = true
 	EnableWebSocket           = true  // 默认启用WebSocket
 	EnableGRPC                = false
-	EnableHTTP3               = true
+	EnableHTTP3               = false
 	EnableRandomPath          = true
 	EnableRandomQueryParams   = true  // 默认启用随机参数
 	UseRandomMethod           = true  // 默认启用随机方法
@@ -66,14 +66,14 @@ var (
 	EnableChunkedTransfer     = true  // 默认启用分块传输
 
 	IgnoreSSLErrors                 = true
-	HTTPVersions                    = "h3"
-	MinTLSVersion                   = tls.VersionTLS13
-	MaxTLSVersion                   = tls.VersionTLS13
-	ForceNewTLSSessionPerConnection = true
-	EnableSharedTLSSessionCache     = false
+	HTTPVersions                    = "http/1.1"
+	MinTLSVersion                   = tls.VersionTLS10
+	MaxTLSVersion                   = tls.VersionTLS12
+	ForceNewTLSSessionPerConnection = false
+	EnableSharedTLSSessionCache     = true
 
 	EnableRateLimit       = false
-	EnableConnectionReuse = false
+	EnableConnectionReuse = true
 	EnableCompression     = true
 	EnableKeepAlive       = false
 
