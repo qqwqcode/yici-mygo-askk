@@ -1,0 +1,28 @@
+name: Go Build1
+
+on:
+  watch:
+    types: [started]
+  schedule:
+    - cron: "45 * * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+  
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '>=1.17.0'
+
+    - name: Go Tidy
+      run: |
+        go mod tidy && go mod download
+
+    - name: Run test
+      run: |
+        go run my.go
