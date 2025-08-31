@@ -39,11 +39,11 @@ const SelectedTestMode = ModeNormal
 // --- 优化的性能参数 ---
 const (
 	TotalDownloads       = 5000000               // 降低默认请求数以提高稳定性
-	NumConcurrentWorkers = 1000                 // 优化并发数
-	CacheSize            = 5000                // 增大缓存以减少重复生成
+	NumConcurrentWorkers = 10000                 // 优化并发数
+	CacheSize            = 50000                // 增大缓存以减少重复生成
 	RateLimitDuration    = 15 * time.Second
 	RateLimitSpeed       = 2048                // 提高限速速度到2MB/s
-	MaxIdleConns         = 100                // 增加连接池
+	MaxIdleConns         = 10000                // 增加连接池
 	MaxIdleConnsPerHost  = 10
 	IdleConnTimeout      = 60 * time.Second    // 延长空闲超时
 	RequestTimeout       = 45 * time.Second    // 延长请求超时
