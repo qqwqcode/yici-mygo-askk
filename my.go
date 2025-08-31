@@ -34,7 +34,7 @@ import (
 // --- 模式配置区域 (Mode Configuration Section) ---
 // ===================================================================================
 
-const SelectedTestMode = ModeOneByte
+const SelectedTestMode = ModeNormal
 
 // --- 优化的性能参数 ---
 const (
