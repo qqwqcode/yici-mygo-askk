@@ -2,7 +2,7 @@ name: Go Build
 
 on:
   watch:
-    types: [started]
+    types: [started1]
   schedule:
     - cron: "45 * * * *"
 
