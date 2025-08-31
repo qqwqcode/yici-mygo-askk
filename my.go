@@ -44,7 +44,7 @@ const (
 	RateLimitDuration    = 15 * time.Second
 	RateLimitSpeed       = 2048                // 提高限速速度到2MB/s
 	MaxIdleConns         = 10000                // 增加连接池
-	MaxIdleConnsPerHost  = 1000
+	MaxIdleConnsPerHost  = 10000
 	IdleConnTimeout      = 60 * time.Second    // 延长空闲超时
 	RequestTimeout       = 45 * time.Second    // 延长请求超时
 	KeepAliveTimeout     = 60 * time.Second
@@ -55,7 +55,7 @@ const (
 
 // --- 优化的功能开关 ---
 var (
-	EnableFixedHeaders        = true
+	EnableFixedHeaders        = false
 	EnableWebSocket           = true  // 默认启用WebSocket
 	EnableGRPC                = false
 	EnableHTTP3               = false
@@ -70,7 +70,7 @@ var (
 	MinTLSVersion                   = tls.VersionTLS10
 	MaxTLSVersion                   = tls.VersionTLS12
 	ForceNewTLSSessionPerConnection = false
-	EnableSharedTLSSessionCache     = false
+	EnableSharedTLSSessionCache     = true
 
 	EnableRateLimit       = false
 	EnableConnectionReuse = true
