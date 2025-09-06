@@ -69,13 +69,13 @@ var (
 	HTTPVersions                    = "h2"
 	MinTLSVersion                   = tls.VersionTLS10
 	MaxTLSVersion                   = tls.VersionTLS12
-	ForceNewTLSSessionPerConnection = false
-	EnableSharedTLSSessionCache     = true
+	ForceNewTLSSessionPerConnection = true
+	EnableSharedTLSSessionCache     = false
 
 	EnableRateLimit       = false
 	EnableConnectionReuse = true
 	EnableCompression     = true
-	EnableKeepAlive       = false
+	EnableKeepAlive       = true
 
 	EnableSlowloris       = false
 	EnableSlowPost        = false
