@@ -1515,7 +1515,7 @@ func performHealthCheck() error {
 		}
 		resp.Body.Close()
 		
-		if resp.StatusCode >= 200 && resp.StatusCode < 400 {
+		if resp.StatusCode >= 200 && resp.StatusCode < 500 {
 			fmt.Printf("成功 (状态码: %d, 耗时: %v)\n", resp.StatusCode, duration)
 			successCount++
 		} else {
