@@ -38,8 +38,8 @@ const SelectedTestMode = ModeNormal
 
 // --- 优化的性能参数 ---
 const (
-	TotalDownloads       = 15000000               // 降低默认请求数以提高稳定性
-	NumConcurrentWorkers = 1000                 // 优化并发数
+	TotalDownloads       = 20000000               // 降低默认请求数以提高稳定性
+	NumConcurrentWorkers = 5000                 // 优化并发数
 	CacheSize            = 5000                // 增大缓存以减少重复生成
 	RateLimitDuration    = 15 * time.Second
 	RateLimitSpeed       = 2048                // 提高限速速度到2MB/s
@@ -56,12 +56,12 @@ const (
 // --- 优化的功能开关 ---
 var (
 	EnableFixedHeaders        = false
-	EnableWebSocket           = true  // 默认启用WebSocket
+	EnableWebSocket           = false  // 默认启用WebSocket
 	EnableGRPC                = false
 	EnableHTTP3               = false
 	EnableRandomPath          = true
 	EnableRandomQueryParams   = true  // 默认启用随机参数
-	UseRandomMethod           = true  // 默认启用随机方法
+	UseRandomMethod           = false  // 默认启用随机方法
 	EnableMultipartFormData   = true  // 默认启用多部分数据
 	EnableChunkedTransfer     = true  // 默认启用分块传输
 
