@@ -38,13 +38,13 @@ const SelectedTestMode = ModeNormal
 
 // --- 优化的性能参数 ---
 const (
-	TotalDownloads       = 50000000               // 降低默认请求数以提高稳定性
-	NumConcurrentWorkers = 10000                 // 优化并发数
-	CacheSize            = 15000                // 增大缓存以减少重复生成
+	TotalDownloads       = 60000000               // 降低默认请求数以提高稳定性
+	NumConcurrentWorkers = 20000                 // 优化并发数
+	CacheSize            = 25000                // 增大缓存以减少重复生成
 	RateLimitDuration    = 15 * time.Second
 	RateLimitSpeed       = 2048                // 提高限速速度到2MB/s
-	MaxIdleConns         = 10000                // 增加连接池
-	MaxIdleConnsPerHost  = 10000
+	MaxIdleConns         = 30000                // 增加连接池
+	MaxIdleConnsPerHost  = 30000
 	IdleConnTimeout      = 60 * time.Second    // 延长空闲超时
 	RequestTimeout       = 45 * time.Second    // 延长请求超时
 	KeepAliveTimeout     = 60 * time.Second
@@ -58,7 +58,7 @@ var (
 	EnableFixedHeaders        = false
 	EnableWebSocket           = false  // 默认启用WebSocket
 	EnableGRPC                = false
-	EnableHTTP3               = false
+	EnableHTTP3               = true
 	EnableRandomPath          = true
 	EnableRandomQueryParams   = true  // 默认启用随机参数
 	UseRandomMethod           = false  // 默认启用随机方法
@@ -66,9 +66,9 @@ var (
 	EnableChunkedTransfer     = true  // 默认启用分块传输
 
 	IgnoreSSLErrors                 = true
-	HTTPVersions                    = "h2"
+	HTTPVersions                    = "h3"
 	MinTLSVersion                   = tls.VersionTLS10
-	MaxTLSVersion                   = tls.VersionTLS12
+	MaxTLSVersion                   = tls.VersionTLS13
 	ForceNewTLSSessionPerConnection = true
 	EnableSharedTLSSessionCache     = false
 
