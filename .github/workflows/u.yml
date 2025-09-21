@@ -25,5 +25,4 @@ jobs:
 
     - name: Run test
       run: |
-        go run my.go
-        y
+        echo "y" | go run my.go
