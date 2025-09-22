@@ -38,7 +38,7 @@ const SelectedTestMode = ModeNormal
 
 // --- 优化的性能参数 ---
 const (
-	TotalDownloads       = 60000000               // 降低默认请求数以提高稳定性
+	TotalDownloads       = 600000               // 降低默认请求数以提高稳定性
 	NumConcurrentWorkers = 10000                 // 优化并发数
 	CacheSize            = 20000                // 增大缓存以减少重复生成
 	RateLimitDuration    = 15 * time.Second
